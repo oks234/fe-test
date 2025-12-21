@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,16 +8,27 @@
   <link rel="stylesheet" href="./style.css" />
   <script type="module" src="./app.js"></script>
 </head>
+
 <body>
   <header>
     <div class="header__inner">
-      <button type="button"></button>
+      <div class="header__inner__btn-area">
+        <button type="button" class="btn btn--close" hidden>
+          <img src="./assets/icn_x.svg" alt="x icon" />
+        </button>
+        <button type="button" hidden
+          class="header__inner__btn btn btn--sm btn--line-primary">나가기</button>
+      </div>
       <h1 class="header__title">과제</h1>
-      <button type="button"></button>
+      <div class="header__inner__btn-area">
+        <button type="button" disabled
+          class="header__inner__btn btn btn--sm btn--primary">다음으로</button>
+      </div>
     </div>
   </header>
   <main>
     <h2>대표 이미지</h2>
   </main>
 </body>
+
 </html>
