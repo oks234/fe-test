@@ -83,7 +83,6 @@ body {
 
 .btn--gray {
   --btn-bg: #323232;
-  --btn-hover-border-color: none;
   --btn-hover-bg: #565656;
   --btn-active-bg: #121212;
   --btn-disabled-bg: #d7d7d7;
@@ -92,9 +91,9 @@ body {
 .btn--primary {
   --btn-bg: #03c124;
   --btn-border-color: none;
-  --btn-hover-border-color: none;
   --btn-hover-bg: #02891a;
   --btn-active-bg: #026a14;
+
   --btn-disabled-bg: #d7d7d7;
 }
 
@@ -113,13 +112,6 @@ body {
   --btn-disabled-border-color: #d7d7d7;
   --btn-disabled-bg: #e5e5e5;
   --btn-disabled-color: #8f8f8f;
-}
-
-.btn--line-primary:disabled,
-.btn--line-primary--disabled {
-  --border-color: #d7d7d7;
-  background: #e5e5e5;
-  color: #8f8f8f;
 }
 
 .btn--close {
@@ -169,6 +161,43 @@ main {
   padding-inline: var(--content-px);
 }
 
+.grid-layout {
+  margin-top: 40px;
+  display: grid;
+  gap: 40px;
+  align-items: start;
+}
+
+.grid-layout__column {
+  display: grid;
+  gap: 40px;
+}
+
+hgroup {
+  margin-bottom: 12px;
+}
+
+hgroup > h2 {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+hgroup > p {
+  margin-top: 8px;
+  font-weight: 500;
+  font-size: 20px;
+  color: #767676;
+}
+
+hgroup > h3 {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+hgroup > h3 + p {
+  font-size: 16px;
+}
+
 @media screen and (width >=767px) {
   :root {
     --content-px: 20px;
@@ -179,9 +208,29 @@ main {
     text-align: center;
   }
 
-.header__inner__btn-area {
-  width: 120px;
-}
+  .grid-layout {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  hgroup {
+    margin-bottom: 16px;
+  }
+
+  hgroup > h2 {
+    font-size: 28px;
+  }
+
+  hgroup > p {
+    font-size: 22px;
+  }
+
+  hgroup > h3 + p {
+    font-size: 18px;
+  }
+
+  .header__inner__btn-area {
+    width: 120px;
+  }
 
   .header__title {
     font-size: 24px;
