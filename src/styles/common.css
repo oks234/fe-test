@@ -15,6 +15,11 @@ body {
   color: var(--body-color);
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 .btn {
   --btn-border-color: none;
   --btn-color: #ffffff;
@@ -25,8 +30,9 @@ body {
   justify-content: center;
   background-color: var(--btn-bg);
   border: 1px solid var(--btn-border-color);
-  border-radius: 4px;
+  border-radius: var(--btn-radius);
   font-weight: 600;
+  font-size: var(--btn-font-size);
   color: var(--btn-color);
   cursor: pointer;
 }
@@ -61,16 +67,24 @@ body {
 }
 
 .btn--sm {
+  --btn-radius: 4px;
+
   height: 38px;
   padding-inline: 12px;
 }
 
 .btn--md {
+  --btn-radius: 6px;
+  --btn-font-size: 18px;
+
   height: 48px;
   padding-inline: 20px;
 }
 
 .btn--lg {
+  --btn-radius: 8px;
+  --btn-font-size: 20px;
+
   height: 58px;
   padding-inline: 20px;
 }
@@ -122,8 +136,14 @@ body {
   width: 48px;
 }
 
+.line-box {
+  border-radius: 8px;
+  background: #f7f7f8;
+  border: 1px solid var(--border-color);
+}
+
 @media screen and (width < 767px) {
-  .pc-only {
+  .tablet-pc-only {
     display: none;
   }
 }
@@ -134,5 +154,14 @@ body {
   }
 }
 
+@media screen and (width < 1100px) {
+  .pc-only {
+    display: none;
+  }
+}
+
 @media screen and (width >= 1100px) {
+  .mobile-tablet-only {
+    display: none;
+  }
 }

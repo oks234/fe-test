@@ -17,22 +17,37 @@
           <img src="./assets/icn_x.svg" alt="x icon" />
         </button>
         <button type="button" hidden
-          class="header__inner__btn btn btn--sm btn--line-primary pc-only">나가기</button>
+          class="header__inner__btn btn btn--sm btn--line-primary tablet-pc-only">나가기</button>
       </div>
       <h1 class="header__title">과제</h1>
       <div class="header__inner__btn-area">
         <button type="button" disabled
-          class="header__inner__btn btn btn--sm btn--primary pc-only">다음으로</button>
+          class="header__inner__btn btn btn--sm btn--primary tablet-pc-only">다음으로</button>
       </div>
     </div>
   </header>
   <main>
     <div class="grid-layout">
       <div class="grid-layout__column">
-        <section>
+        <section id="main-image">
           <hgroup>
             <h2>대표 이미지</h2>
           </hgroup>
+          <div class="line-box main-image__box">
+            <div class="js-main-image-disp main-image__disp">
+              <p class="main-image__title">콘텐츠 대표 이미지를 <br />등록해 주세요!</p>
+              <p class="main-image__desc">1:1 비율의 정사각형 이미지를 추천합니다</p>
+              <button type="button"
+                class="js-main-image-btn btn btn--lg btn--gray main-image__btn pc-only">이미지
+                업로드</button>
+              <button type="button"
+                class="js-main-image-btn btn btn--md btn--gray main-image__btn mobile-tablet-only">이미지
+                업로드</button>
+              <input type="file" name="main-image" id="main-image-input" hidden
+                accept=".jpg,.png">
+            </div>
+            <img class="js-main-image main-image__img" alt="대표 이미지" hidden />
+          </div>
         </section>
         <section>
           <hgroup>
