@@ -13,16 +13,16 @@
   <header>
     <div class="header__inner">
       <div class="header__inner__btn-area">
-        <button type="button" class="btn btn--close" hidden>
+        <button type="button" class="btn btn--close mobile-only" hidden>
           <img src="./assets/icn_x.svg" alt="x icon" />
         </button>
         <button type="button" hidden
-          class="header__inner__btn btn btn--sm btn--line-primary">나가기</button>
+          class="header__inner__btn btn btn--sm btn--line-primary pc-only">나가기</button>
       </div>
       <h1 class="header__title">과제</h1>
       <div class="header__inner__btn-area">
         <button type="button" disabled
-          class="header__inner__btn btn btn--sm btn--primary">다음으로</button>
+          class="header__inner__btn btn btn--sm btn--primary pc-only">다음으로</button>
       </div>
     </div>
   </header>
@@ -72,6 +72,11 @@
       </div>
     </div>
   </main>
+  <nav class="bottom-mobile-nav">
+    <button type="button" disabled
+      class="header__inner__btn btn btn--md btn--primary">다음으로</button>
+    </div>
+  </nav>
 </body>
 
 </html>

@@ -1,0 +1,138 @@
+:root {
+  --body-color: #121212;
+  --border-color: #e5e5e5;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  /* prettier-ignore */
+  font-family: 'Pretendard', '맑은 고딕', Malgun Gothic, 'Apple SD Gothic Neo', '나눔고딕', Arial, sans-serif;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--body-color);
+}
+
+.btn {
+  --btn-border-color: none;
+  --btn-color: #ffffff;
+
+  -webkit-tap-highlight-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--btn-bg);
+  border: 1px solid var(--btn-border-color);
+  border-radius: 4px;
+  font-weight: 600;
+  color: var(--btn-color);
+  cursor: pointer;
+}
+
+.btn[hidden] {
+  display: none;
+}
+
+/* 마우스 사용이 가능한 기기에서만 호버 효과 적용 */
+@media (hover: hover) {
+  .btn:hover,
+  .btn--hover {
+    border-color: var(--btn-hover-border-color, var(--btn-border-color));
+    background: var(--btn-hover-bg, var(--btn-bg));
+    color: var(--btn-hover-color, var(--btn-color));
+  }
+}
+
+.btn:active,
+.btn--active {
+  border-color: var(--btn-active-border-color, var(--btn-border-color));
+  background: var(--btn-active-bg, var(--btn-bg));
+  color: var(--btn-active-color, var(--btn-color));
+}
+
+.btn:disabled,
+.btn--disabled {
+  border-color: var(--btn-disabled-border-color, var(--btn-border-color));
+  background: var(--btn-disabled-bg, var(--btn-bg));
+  color: var(--btn-disabled-color, var(--btn-color));
+  pointer-events: none;
+}
+
+.btn--sm {
+  height: 38px;
+  padding-inline: 12px;
+}
+
+.btn--md {
+  height: 48px;
+  padding-inline: 20px;
+}
+
+.btn--lg {
+  height: 58px;
+  padding-inline: 20px;
+}
+
+.btn--gray {
+  --btn-bg: #323232;
+  --btn-hover-bg: #565656;
+  --btn-active-bg: #121212;
+  --btn-disabled-bg: #d7d7d7;
+}
+
+.btn--primary {
+  --btn-bg: #03c124;
+  --btn-border-color: none;
+  --btn-hover-bg: #02891a;
+  --btn-active-bg: #026a14;
+
+  --btn-disabled-bg: #d7d7d7;
+}
+
+.btn--line-primary {
+  --btn-border-color: var(--border-color);
+  --btn-bg: #f7f7f8;
+  --btn-color: #323232;
+
+  --btn-hover-border-color: #bababa;
+  --btn-hover-bg: #e5e5e5;
+
+  --btn-active-border-color: #03c124;
+  --btn-active-bg: #e6f9e9;
+  --btn-active-color: #03c124;
+
+  --btn-disabled-border-color: #d7d7d7;
+  --btn-disabled-bg: #e5e5e5;
+  --btn-disabled-color: #8f8f8f;
+}
+
+.btn--close {
+  --btn-hover-bg: #f7f7f8;
+  --btn-active-bg: #e5e5e5;
+
+  padding: 0;
+  width: 28px;
+  aspect-ratio: 1;
+  cursor: pointer;
+}
+
+.btn--close--lg {
+  width: 48px;
+}
+
+@media screen and (width < 767px) {
+  .pc-only {
+    display: none;
+  }
+}
+
+@media screen and (width >= 767px) {
+  .mobile-only {
+    display: none;
+  }
+}
+
+@media screen and (width >= 1100px) {
+}
