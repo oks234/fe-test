@@ -32,9 +32,11 @@ main {
 
 .grid-layout {
   margin-top: 40px;
-  display: grid;
   gap: 40px;
   align-items: start;
+}
+.grid-layout:not([hidden]) {
+  display: grid;
 }
 
 .grid-layout__column {
@@ -74,6 +76,15 @@ hgroup > h3 + p {
   background: #ffffff;
   border-top: 1px solid var(--border-color);
   padding: 8px 16px 16px;
+}
+
+.category-layout {
+  margin-top: 40px;
+  gap: 16px;
+}
+
+.category-layout:not([hidden]) {
+  display: grid;
 }
 
 @media screen and (width >= 767px) {
@@ -119,5 +130,9 @@ hgroup > h3 + p {
 
   hgroup > h3 + p {
     font-size: 18px;
+  }
+
+  .category-layout {
+    gap: 24px;
   }
 }

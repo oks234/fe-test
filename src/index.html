@@ -27,7 +27,9 @@
     </div>
   </header>
   <main>
-    <div class="grid-layout">
+
+    <!-- 메인 Layout -->
+    <div class="grid-layout js-main-layout">
       <div class="grid-layout__column">
 
         <!-- 대표 이미지 SECTION -->
@@ -91,6 +93,8 @@
         </section>
       </div>
       <div class="grid-layout__column">
+
+        <!-- 카테고리 SECTION -->
         <section id="category-section">
           <hgroup>
             <h2>카테고리</h2>
@@ -124,6 +128,59 @@
           </article>
         </section>
       </div>
+    </div>
+
+    <!-- 카테고리 Layout -->
+    <div class="category-layout js-category-layout" hidden>
+      <section id="category-select-section">
+        <hgroup>
+          <h2>어떤 카테고리의 <br />
+            콘텐츠를 만드시나요?</h2>
+          <p>최대 2개까지 선택 가능합니다.</p>
+        </hgroup>
+      </section>
+      <ul class="category-list">
+        <li>
+          <button type="button"
+            class="category-btn btn btn--md btn--line-primary"
+            data-value="용돈벌기">용돈벌기</button>
+        </li>
+        <li>
+          <button type="button"
+            class="category-btn btn btn--md btn--line-primary"
+            data-value="디지털">디지털</button>
+        </li>
+        <li>
+          <button type="button"
+            class="category-btn btn btn--md btn--line-primary"
+            data-value="그림">그림</button>
+        </li>
+        <li>
+          <button type="button"
+            class="category-btn btn btn--md btn--line-primary"
+            data-value="글쓰기/독서">글쓰기/독서</button>
+        </li>
+        <li>
+          <button type="button"
+            class="category-btn btn btn--md btn--line-primary"
+            data-value="건강/운동">건강/운동</button>
+        </li>
+        <li>
+          <button type="button"
+            class="category-btn btn btn--md btn--line-primary"
+            data-value="동기부여/성장">동기부여/성장</button>
+        </li>
+        <li>
+          <button type="button"
+            class="category-btn btn btn--md btn--line-primary"
+            data-value="취미힐링">취미힐링</button>
+        </li>
+        <li>
+          <button type="button"
+            class="category-btn btn btn--md btn--line-primary"
+            data-value="외국어">외국어</button>
+        </li>
+      </ul>
     </div>
   </main>
   <nav class="bottom-mobile-nav">

@@ -3,7 +3,9 @@ const FILE_SIZE_OVER_MSG = '15MB 이하 이미지를 업로드해 주세요.';
 const MORE_FILES_OVER_LENGTH_MSG =
   '추가 이미지는 최대 4장까지 등록할 수 있어요.';
 
-console.log({ FILE_SIZE_LIMIT });
+const mainLayout = document.querySelector('.js-main-layout');
+
+console.log({ mainLayout });
 
 const toggleElemHidden = (element, force) => {
   if (!element) return;
@@ -164,11 +166,7 @@ function moreImages() {
 
       if (isSizeOver) return;
 
-      console.log({ file, isSizeOver });
-
       const imgEl = input.closest('.js-more-images-box').querySelector('img');
-
-      console.log();
 
       loadedFileToImgEl(file, imgEl);
     });
