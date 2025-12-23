@@ -57,9 +57,66 @@
 }
 
 /* 추가 이미지 */
+.more-images__content {
+  max-width: calc(100vw - 32px);
+  margin-bottom: -16px;
+  padding-bottom: 16px;
+  overflow-x: auto;
+}
+
+.more-images__grid {
+  display: flex;
+  gap: 8px;
+}
+
+.more-images__box {
+  position: relative;
+  flex-shrink: 0;
+  width: 120px;
+  aspect-ratio: 1;
+  background-image: url(./assets/icn_image-plus.svg);
+  background-size: 32px;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.more-images__box[data-box-index='1'] {
+  order: 4;
+}
+
+.more-images__box[data-box-index='2'] {
+  order: 3;
+}
+
+.more-images__box[data-box-index='3'] {
+  order: 2;
+}
+
+.more-images__box[data-box-index='4'] {
+  order: 1;
+}
+
+.more-images__img {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+}
 
 @media screen and (width >= 767px) {
+  .more-images__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .more-images__box {
+    width: auto;
+  }
 }
 
 @media screen and (width >= 1100px) {
+  .more-images__box {
+    background-size: 60px;
+  }
 }
