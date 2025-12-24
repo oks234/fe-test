@@ -1,11 +1,32 @@
 const FILE_SIZE_LIMIT = 15 * 10e6; // 15MB
 const FILE_SIZE_OVER_MSG = '15MB 이하 이미지를 업로드해 주세요.';
 const MORE_FILES_OVER_LENGTH_MSG =
-  '추가 이미지는 최대 4장까지 등록할 수 있어요.';
+const LAYOUT_NAME = {
+  MAIN: 'main',
+  CATEGORY: 'category',
+};
+const BTN_ACTIVE_CLASS = 'btn--active';
+const CATEGORY_BTN_ACTIVE_LIMIT = 2;
+const CATEGORY_ACTIVE_OVER_MGS = '최대 2개까지만 선택 가능해요';
+
+// DOM ELEMENTS
+const headerCloseBtns = [...document.querySelectorAll('.header__close-btn')];
 
 const mainLayout = document.querySelector('.js-main-layout');
+const categoryLayout = document.querySelector('.js-category-layout');
+
 
 console.log({ mainLayout });
+
+const toggleLayout = () => {
+  const isLayoutMain = document.body.dataset.layout === LAYOUT_NAME.MAIN;
+
+  if (isLayoutMain) {
+    document.body.dataset.layout = LAYOUT_NAME.CATEGORY;
+  } else {
+    document.body.dataset.layout = LAYOUT_NAME.MAIN;
+  }
+};
 
 const toggleElemHidden = (element, force) => {
   if (!element) return;
@@ -41,9 +62,35 @@ const loadedFileToImgEl = (file, imgEl, callback) => {
   };
 };
 
+const validIsBtnActive = (btn) => btn.classList.contains(BTN_ACTIVE_CLASS);
+const toggleBtnActive = (btn) => btn.classList.toggle(BTN_ACTIVE_CLASS);
+const deactivateBtn = (btn) => btn.classList.remove(BTN_ACTIVE_CLASS);
+
+const updateSelectBoxValue = (selectBox, value) => {
+  if (!selectBox) return;
+
+  const placeholder = selectBox.querySelector('.select-box__placeholder');
+  const content = selectBox.querySelector('.select-box__content');
+
+  if (!placeholder || !content) return;
+
+  if (!value) {
+    hideElem(content);
+    showElem(placeholder);
+
+    return;
+  }
+
+  content.textContent = value;
+  hideElem(placeholder);
+  showElem(content);
+};
+
+
 document.addEventListener('DOMContentLoaded', function () {
   mainImage();
   moreImages();
+  initCategorySection();
 });
 
 function mainImage() {
@@ -107,8 +154,6 @@ function moreImages() {
 
   if (!boxes?.length || !imgEls?.length || !boxInputs?.length || !input) return;
 
-  console.log(getEmptyImgEls());
-
   for (const box of boxes) {
     box.addEventListener('click', (event) => {
       const imgEl = event.currentTarget.querySelector('img');
@@ -171,6 +216,74 @@ function moreImages() {
       loadedFileToImgEl(file, imgEl);
     });
   }
+}
 
-  console.log({ section, boxes, input });
+function initCategorySection() {
+  const categorySection = document.getElementById('category-section');
+  const categorySelectSection = document.getElementById(
+    'category-select-section',
+  );
+
+  if (!categorySection || !categorySelectSection) return;
+
+  const selectBox = categorySection.querySelector('.select-box');
+  const btns = [...categorySelectSection.querySelectorAll('.btn')];
+
+  const getBtnValue = (btn) => btn.dataset.value;
+  const getActiveBtns = () => btns.filter(validIsBtnActive);
+  const updateSelectBox = () => {
+    const activeBtns = getActiveBtns();
+
+    if (activeBtns.length === 0) {
+      updateSelectBoxValue(selectBox, '');
+
+      return;
+    }
+
+    const activeValues = activeBtns.map(getBtnValue).join(', ');
+
+    updateSelectBoxValue(selectBox, activeValues);
+  };
+
+  const handleBtnClick = (event) => {
+    const btn = event.currentTarget;
+    const isActive = validIsBtnActive(btn);
+
+    if (isActive) {
+      toggleBtnActive(btn);
+      updateSelectBox();
+
+      return;
+    }
+
+    const activeBtns = getActiveBtns();
+    const isActiveBtnsOver = activeBtns.length === CATEGORY_BTN_ACTIVE_LIMIT;
+
+    if (isActiveBtnsOver) {
+      // TO-DO: Toast로 교체
+      alert(CATEGORY_ACTIVE_OVER_MGS);
+
+      return;
+    }
+
+    toggleBtnActive(btn);
+    updateSelectBox();
+  };
+
+  if (!selectBox || !btns?.length) return;
+
+  selectBox.addEventListener('click', () => {
+    toggleLayout();
+
+    for (const btn of headerCloseBtns) {
+      btn.addEventListener('click', toggleLayout, { once: true });
+    }
+  });
+
+  for (const btn of btns) {
+    btn.addEventListener('click', handleBtnClick);
+  }
+}
+
+}
 }

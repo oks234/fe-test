@@ -9,15 +9,16 @@
   <script type="module" src="./app.js"></script>
 </head>
 
-<body>
+<body data-layout="main">
   <header>
     <div class="header__inner">
       <div class="header__inner__btn-area">
-        <button type="button" class="btn btn--close mobile-only" hidden>
+        <button type="button"
+          class="btn btn--close mobile-only header__close-btn">
           <img src="./assets/icn_x.svg" alt="x icon" />
         </button>
-        <button type="button" hidden
-          class="header__inner__btn btn btn--sm btn--line-primary tablet-pc-only">나가기</button>
+        <button type="button"
+          class="header__inner__btn btn btn--sm btn--line-primary tablet-pc-only header__close-btn">나가기</button>
       </div>
       <h1 class="header__title">과제</h1>
       <div class="header__inner__btn-area">
@@ -110,11 +111,25 @@
             <h2>콘텐츠 제목</h2>
           </hgroup>
         </section>
-        <section>
+
+        <!-- 활동 방식 선택 SECTION -->
+        <section id="meeting-type-section">
           <hgroup>
             <h2>활동 방식 선택</h2>
             <p>만남을 어떤 방식으로 진행하시겠어요?</p>
           </hgroup>
+          <!-- 온라인, 직접 만나기 / 47 -> 58 -->
+          <ul class="meeting-type__btns">
+            <li>
+              <button type="button"
+                class="meeting-type__btn btn btn--md btn--line-primary">온라인</button>
+            </li>
+            <li>
+              <button type="button"
+                class="meeting-type__btn btn btn--md btn--line-primary">직접
+                만나기</button>
+            </li>
+          </ul>
         </section>
         <section>
           <hgroup>
@@ -131,56 +146,48 @@
     </div>
 
     <!-- 카테고리 Layout -->
-    <div class="category-layout js-category-layout" hidden>
+    <div class="category-layout">
       <section id="category-select-section">
         <hgroup>
           <h2>어떤 카테고리의 <br />
             콘텐츠를 만드시나요?</h2>
           <p>최대 2개까지 선택 가능합니다.</p>
         </hgroup>
-      </section>
       <ul class="category-list">
         <li>
-          <button type="button"
-            class="category-btn btn btn--md btn--line-primary"
+            <button type="button" class="btn btn--md btn--line-primary"
             data-value="용돈벌기">용돈벌기</button>
         </li>
         <li>
-          <button type="button"
-            class="category-btn btn btn--md btn--line-primary"
+            <button type="button" class="btn btn--md btn--line-primary"
             data-value="디지털">디지털</button>
         </li>
         <li>
-          <button type="button"
-            class="category-btn btn btn--md btn--line-primary"
+            <button type="button" class="btn btn--md btn--line-primary"
             data-value="그림">그림</button>
         </li>
         <li>
-          <button type="button"
-            class="category-btn btn btn--md btn--line-primary"
+            <button type="button" class="btn btn--md btn--line-primary"
             data-value="글쓰기/독서">글쓰기/독서</button>
         </li>
         <li>
-          <button type="button"
-            class="category-btn btn btn--md btn--line-primary"
+            <button type="button" class="btn btn--md btn--line-primary"
             data-value="건강/운동">건강/운동</button>
         </li>
         <li>
-          <button type="button"
-            class="category-btn btn btn--md btn--line-primary"
+            <button type="button" class="btn btn--md btn--line-primary"
             data-value="동기부여/성장">동기부여/성장</button>
         </li>
         <li>
-          <button type="button"
-            class="category-btn btn btn--md btn--line-primary"
+            <button type="button" class="btn btn--md btn--line-primary"
             data-value="취미힐링">취미힐링</button>
         </li>
         <li>
-          <button type="button"
-            class="category-btn btn btn--md btn--line-primary"
+            <button type="button" class="btn btn--md btn--line-primary"
             data-value="외국어">외국어</button>
         </li>
       </ul>
+      </section>
     </div>
   </main>
   <nav class="bottom-mobile-nav">
