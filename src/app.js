@@ -91,6 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
   mainImage();
   moreImages();
   initCategorySection();
+  initMeetingType();
 });
 
 function mainImage() {
@@ -279,6 +280,32 @@ function initCategorySection() {
       btn.addEventListener('click', toggleLayout, { once: true });
     }
   });
+
+  for (const btn of btns) {
+    btn.addEventListener('click', handleBtnClick);
+  }
+}
+
+function initMeetingType() {
+  const section = document.getElementById('meeting-type-section');
+
+  if (!section) return;
+
+  const btns = [...section.querySelectorAll('.meeting-type__btn')];
+
+  const deactivateBtns = () => btns.forEach(deactivateBtn);
+
+  const handleBtnClick = (event) => {
+    const { currentTarget: btn } = event;
+    const isActive = validIsBtnActive(btn);
+
+    if (isActive) return;
+
+    deactivateBtns();
+    toggleBtnActive(btn);
+  };
+
+  if (!btns.length) return;
 
   for (const btn of btns) {
     btn.addEventListener('click', handleBtnClick);
