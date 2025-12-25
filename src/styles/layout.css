@@ -32,6 +32,7 @@ main {
   max-width: 1100px;
   margin-inline: auto;
   padding-inline: 16px;
+  padding-bottom: 73px;
 }
 
 .grid-layout {
@@ -105,6 +106,7 @@ hgroup > h3 + p {
 
   main {
     padding-inline: 20px;
+    padding-bottom: 0;
   }
 
   .header__inner {

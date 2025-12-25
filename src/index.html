@@ -10,6 +10,76 @@
 </head>
 
 <body data-layout="main">
+
+  <template id="detail-item-template">
+    <article class="js-detail-item detail-item" data-index>
+      <button type="button" hidden
+        class="js-delete-detail-item detail-item__close-btn btn btn--close">
+        <img src="./assets/icn_x.svg" alt="x icon" />
+      </button>
+      <div>
+        <hgroup>
+          <h3><span class="js-detail-item__no">1</span>회차 정보</h3>
+        </hgroup>
+        <ul class="detail-item__grid">
+          <li>
+            <div class="detail-item__label">날짜 선택</div>
+            <button type="button"
+              class="js-details-select-date-box detail-item__select-box select-box">
+              <span class="select-box__placeholder">날짜를 선택해주세요</span>
+              <div class="select-box__content" hidden>
+                <input type="text"
+                  class="js-date-picker-input select-box__date-input" readonly>
+              </div>
+            </button>
+            <div class="js-date-picker-wrapper detail-item__date-picker"></div>
+          </li>
+          <li>
+            <div class="detail-item__label">시작 시간</div>
+            <div
+              class="detail-item__select-box detail-item__time-select-box select-box">
+              <button
+                class="js-am-pm-toggle btn btn--sm btn--line-primary start"
+                data-value="am">오전</button>
+              <input type="text" inputmode="numeric" maxlength="2" required
+                value="10" name="start-hour" />
+              <span>:</span>
+              <input type="text" inputmode="numeric" maxlength="2" required
+                value="00" name="start-min" />
+            </div>
+          </li>
+          <li>
+            <div class="detail-item__label">종료 시간</div>
+            <div
+              class="detail-item__select-box detail-item__time-select-box select-box">
+              <button class="js-am-pm-toggle btn btn--sm btn--line-primary end"
+                data-value="am">오전</button>
+              <input type="text" inputmode="numeric" maxlength="2" required
+                value="11" name="end-hour" />
+              <span>:</span>
+              <input type="text" inputmode="numeric" maxlength="2" required
+                value="00" name="end-min" />
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <hgroup>
+          <h3>활동 내용</h3>
+          <p>날짜별 활동 내용을 간단히 적어주세요</p>
+        </hgroup>
+        <div class="textarea-wrapper" data-state>
+          <textarea class="js-textarea" placeholder="활동 내용을 간단히 입력해주세요"
+            minlength="8" maxlength="800"></textarea>
+          <div class="textarea-footer">
+            <span class="js-textarea__count">0</span> / 800자 (최소 8자)
+          </div>
+        </div>
+        <p class="textarea-error">8자 이상 입력해주세요</p>
+      </div>
+    </article>
+  </template>
+
   <header>
     <div class="header__inner">
       <div class="header__inner__btn-area">
@@ -27,6 +97,7 @@
       </div>
     </div>
   </header>
+
   <main>
 
     <!-- 메인 Layout -->
@@ -106,7 +177,9 @@
             <img src="./assets/icn_chevron_right.svg" alt="우측 화살표 이미지" />
           </button>
         </section>
-        <section>
+
+        <!-- 콘텐츠 제목 SECTION -->
+        <section id="content-title-section">
           <hgroup>
             <h2>콘텐츠 제목</h2>
           </hgroup>
@@ -131,16 +204,18 @@
             </li>
           </ul>
         </section>
-        <section>
+
+        <!-- 상세 정보 SECTION -->
+        <section id="details-section">
           <hgroup>
             <h2>상세 정보</h2>
           </hgroup>
-          <article>
-            <hgroup>
-              <h3>활동 내용</h3>
-              <p>날짜별 활동 내용을 간단히 적어주세요</p>
-            </hgroup>
-          </article>
+          <div class="js-detail-items-container details__items-container">
+            <!-- article.detail-item -->
+          </div>
+          <button type="button"
+            class="details__add-detail-btn btn btn--md btn--gray">회차
+            추가하기</button>
         </section>
       </div>
     </div>
@@ -153,43 +228,44 @@
             콘텐츠를 만드시나요?</h2>
           <p>최대 2개까지 선택 가능합니다.</p>
         </hgroup>
-      <ul class="category-list">
-        <li>
+        <ul class="category-list">
+          <li>
             <button type="button" class="btn btn--md btn--line-primary"
-            data-value="용돈벌기">용돈벌기</button>
-        </li>
-        <li>
+              data-value="용돈벌기">용돈벌기</button>
+          </li>
+          <li>
             <button type="button" class="btn btn--md btn--line-primary"
-            data-value="디지털">디지털</button>
-        </li>
-        <li>
+              data-value="디지털">디지털</button>
+          </li>
+          <li>
             <button type="button" class="btn btn--md btn--line-primary"
-            data-value="그림">그림</button>
-        </li>
-        <li>
+              data-value="그림">그림</button>
+          </li>
+          <li>
             <button type="button" class="btn btn--md btn--line-primary"
-            data-value="글쓰기/독서">글쓰기/독서</button>
-        </li>
-        <li>
+              data-value="글쓰기/독서">글쓰기/독서</button>
+          </li>
+          <li>
             <button type="button" class="btn btn--md btn--line-primary"
-            data-value="건강/운동">건강/운동</button>
-        </li>
-        <li>
+              data-value="건강/운동">건강/운동</button>
+          </li>
+          <li>
             <button type="button" class="btn btn--md btn--line-primary"
-            data-value="동기부여/성장">동기부여/성장</button>
-        </li>
-        <li>
+              data-value="동기부여/성장">동기부여/성장</button>
+          </li>
+          <li>
             <button type="button" class="btn btn--md btn--line-primary"
-            data-value="취미힐링">취미힐링</button>
-        </li>
-        <li>
+              data-value="취미힐링">취미힐링</button>
+          </li>
+          <li>
             <button type="button" class="btn btn--md btn--line-primary"
-            data-value="외국어">외국어</button>
-        </li>
-      </ul>
+              data-value="외국어">외국어</button>
+          </li>
+        </ul>
       </section>
     </div>
   </main>
+
   <nav class="bottom-mobile-nav">
     <button type="button" disabled
       class="header__inner__btn btn btn--md btn--primary">다음으로</button>

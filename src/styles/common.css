@@ -1,6 +1,9 @@
 :root {
   --body-color: #121212;
   --border-color: #e5e5e5;
+  --success-color: #03c124;
+  --error-color: #e82929;
+  --placeholder-color: #8f8f8f;
 }
 
 html {
@@ -119,7 +122,7 @@ img {
 
   --btn-disabled-border-color: #d7d7d7;
   --btn-disabled-bg: #e5e5e5;
-  --btn-disabled-color: #8f8f8f;
+  --btn-disabled-color: var(--placeholder-color);
 }
 
 .btn--close {
@@ -154,7 +157,7 @@ img {
   justify-content: space-between;
   width: 100%;
   height: var(--height);
-  background: transparent;
+  background: #ffffff;
   padding-inline: var(--px);
   font-size: var(--font-size);
   font-weight: 500;
@@ -162,11 +165,73 @@ img {
 }
 
 .select-box__placeholder {
-  color: #8f8f8f;
+  color: var(--placeholder-color);
 }
 
 .select-box > img {
   width: 24px;
+}
+
+.textarea-wrapper {
+  --height: 118px;
+  --font-size: 16px;
+  --py: 12px;
+  --textarea-border-color: var(--border-color);
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  border: 1px solid var(--textarea-border-color);
+  background: #ffffff;
+  height: var(--height);
+  font-weight: 500;
+  font-size: var(--font-size);
+}
+
+.textarea-wrapper[data-state='success'] {
+  --textarea-border-color: var(--success-color);
+}
+
+.textarea-wrapper[data-state='error'] {
+  --textarea-border-color: var(--error-color);
+}
+
+.textarea-wrapper textarea {
+  all: unset;
+  font: inherit;
+  resize: none;
+  border: none;
+  background: none;
+  padding: var(--py) 16px 46px;
+  appearance: none;
+}
+
+.textarea-wrapper[data-state='error'] textarea {
+  outline-color: var(--error-color);
+}
+
+.textarea-wrapper textarea::placeholder {
+  color: var(--placeholder-color);
+}
+
+.textarea-footer {
+  padding: 8px 16px var(--py);
+  font-weight: 500;
+  font-size: 14px;
+  text-align: right;
+  color: var(--placeholder-color);
+}
+
+.textarea-error {
+  display: none;
+  font-weight: 500;
+  margin-top: 4px;
+  color: var(--error-color);
+}
+
+.textarea-wrapper[data-state='error'] + .textarea-error {
+  display: block;
 }
 
 @media screen and (width < 767px) {
@@ -195,5 +260,11 @@ img {
   .select-box {
     --height: 60px;
     --font-size: 18px;
+  }
+
+  .textarea-wrapper {
+    --height: 138px;
+    --font-size: 18px;
+    --py: 16px;
   }
 }

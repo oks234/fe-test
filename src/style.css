@@ -1,3 +1,4 @@
+@import './styles/tui-date-picker.min.css';
 @import './styles/reset.css';
 @import './styles/font.css';
 @import './styles/common.css';
@@ -157,6 +158,13 @@
   }
 }
 
+/* 콘텐츠 제목 */
+@media screen and (width >= 767px) {
+}
+
+@media screen and (width >= 1100px) {
+}
+
 /* 활동 방식 선택 */
 .meeting-type__btns {
   display: grid;
@@ -177,6 +185,314 @@
 
 @media screen and (width >= 1100px) {
   .meeting-type__btn {
+    --btn-radius: 8px;
+    --btn-font-size: 20px;
+
+    height: 58px;
+    padding-inline: 20px;
+  }
+}
+
+/* 상세 정보 */
+.details__items-container {
+  display: grid;
+  gap: 12px;
+}
+
+.detail-item {
+  position: relative;
+  border-radius: 8px;
+  display: grid;
+  gap: 32px;
+  padding: 24px 16px;
+  gap: 32px;
+  background: #f7f7f8;
+}
+
+.detail-item__close-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 48px;
+  padding: 10px;
+}
+
+.detail-item__close-btn > img {
+  width: 28px;
+}
+
+.detail-item__select-box {
+  --height: 50px;
+
+  justify-content: center;
+}
+
+.detail-item__grid {
+  --label-size: 58px;
+  --li-gap: 16px;
+
+  display: grid;
+  gap: 12px;
+}
+
+.detail-item__grid > li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--li-gap);
+}
+
+.detail-item__label {
+  width: var(--label-size);
+  flex-shrink: 0;
+  font-weight: 600;
+  color: #565656;
+}
+
+.select-box__date-input {
+  appearance: none;
+  border: none;
+  font: inherit;
+  background: none;
+  text-align: center;
+  pointer-events: none;
+}
+
+.detail-item__date-picker {
+  --top: 50px;
+  --size: 280px;
+
+  position: absolute;
+  top: var(--top);
+  right: calc((100% - var(--label-size) - var(--li-gap) - var(--size)) / 2);
+  width: var(--size);
+  z-index: 1;
+}
+
+.tui-datepicker {
+  --padding: 12px;
+
+  box-shadow:
+    0px 4px 10px -1px #0000001a,
+    0px 2px 4px -2px #0000001a;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  gap: 16px;
+  padding: var(--padding);
+}
+
+.tui-datepicker:not(.tui-hidden) {
+  display: grid;
+}
+
+.tui-calendar {
+  width: auto;
+  background-color: transparent;
+}
+
+.tui-calendar .tui-calendar-header {
+  border: none;
+}
+
+.tui-calendar .tui-calendar-header-inner {
+  box-sizing: content-box;
+  height: 30px;
+  padding: 0;
+  text-align: left;
+  pointer-events: none;
+}
+
+.tui-calendar .tui-calendar-title {
+  display: block;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--body-color);
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+.tui-calendar .tui-calendar-btn {
+  --top: 0;
+  --size: 30px;
+  --icon-size: 20px;
+
+  top: var(--top);
+  right: var(--right);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  width: var(--size);
+  height: var(--size);
+  padding: 0;
+  border: 1px solid var(--border-color);
+  pointer-events: auto;
+}
+
+.tui-calendar .tui-calendar-btn.tui-hidden {
+  pointer-events: none;
+}
+
+.tui-calendar .tui-calendar-btn.tui-hidden::after {
+  opacity: 0.3;
+}
+
+.tui-calendar .tui-calendar-btn-prev-month {
+  --right: 32px;
+
+  left: auto;
+}
+
+.tui-calendar .tui-calendar-btn-next-month {
+  --right: 0;
+
+  left: auto;
+}
+
+.tui-calendar .tui-calendar-btn-prev-month:after,
+.tui-calendar .tui-calendar-btn-next-month:after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: auto;
+  height: auto;
+  background: #ffffff center / var(--icon-size) no-repeat;
+  margin: 0;
+}
+
+.tui-calendar .tui-calendar-btn-prev-month:after {
+  background-image: url(./assets/icn_chevron_left.svg);
+}
+
+.tui-calendar .tui-calendar-btn-next-month:after {
+  background-image: url(./assets/icn_chevron_right.svg);
+}
+
+.tui-calendar-header-info {
+  display: none;
+}
+
+.tui-calendar .tui-calendar-body-inner {
+  --font-size: 14px;
+
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.3;
+  letter-spacing: 0;
+}
+
+.tui-calendar td,
+.tui-calendar th {
+  --height: 32px;
+
+  height: var(--height);
+  vertical-align: middle;
+  color: var(--body-color);
+}
+
+.tui-datepicker .tui-is-blocked {
+  color: #e5e5e5;
+}
+
+.tui-calendar .tui-calendar-body-header th {
+  font: inherit;
+  color: inherit;
+}
+
+.tui-datepicker .tui-is-selectable.tui-is-selected {
+  border-radius: 6px;
+  background-color: var(--success-color);
+}
+
+.tui-datepicker-type-date {
+  width: auto;
+}
+
+.detail-item__time-select-box {
+  gap: 10px;
+  padding: 0;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.detail-item__time-select-box .btn {
+  flex-shrink: 0;
+  margin-left: 10px;
+}
+
+.detail-item__time-select-box input {
+  border: none;
+  background: none;
+  padding: 0;
+  text-align: center;
+  font: inherit;
+  width: 100%;
+  height: 100%;
+}
+
+.details__add-detail-btn {
+  width: 100%;
+  margin-top: 24px;
+}
+
+@media screen and (width >= 767px) {
+}
+
+@media screen and (width >= 1100px) {
+  .details__items-container {
+    gap: 20px;
+  }
+
+  .detail-item {
+    padding: 28px 20px;
+  }
+
+  .detail-item__select-box {
+    --height: 60px;
+  }
+
+  .detail-item__grid {
+    --label-size: 65px;
+    --li-gap: 24px;
+  }
+
+  .detail-item__label {
+    font-size: 18px;
+  }
+
+  .detail-item__time-select-box {
+    font-size: 20px;
+  }
+
+  .detail-item__date-picker {
+    --top: 60px;
+    --size: 330px;
+  }
+
+  .tui-datepicker {
+    --padding: 16px;
+  }
+
+  .tui-calendar td,
+  .tui-calendar th {
+    --height: 40px;
+
+    font-size: 18px;
+  }
+
+  .tui-calendar .tui-calendar-body-header th {
+    font-size: 16px;
+  }
+
+  .change-date-picker-btn {
+    --btn-radius: 6px;
+    --btn-font-size: 18px;
+
+    height: 48px;
+    padding-inline: 20px;
+  }
+
+  .details__add-detail-btn {
     --btn-radius: 8px;
     --btn-font-size: 20px;
 
