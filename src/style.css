@@ -5,6 +5,7 @@
 @import './styles/common.css';
 @import './styles/layout.css';
 
+/* TOAST */
 .notyf {
   padding: 0 16px 84px;
 }
@@ -49,6 +50,7 @@
 @media screen and (width >= 1100px) {
 }
 
+/* DATE PICKER */
 .tui-datepicker {
   --padding: 12px;
 

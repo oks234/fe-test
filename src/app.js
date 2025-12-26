@@ -78,8 +78,6 @@ const validateCanGoNext = () => {
   const canGoNext = canGoNextValidators.every((validator) => validator());
   const goNextBtn = document.querySelector('.js-go-next-btn');
   goNextBtn.disabled = !canGoNext;
-
-  console.log({ canGoNext });
 };
 
 const toast = (msg) => {
