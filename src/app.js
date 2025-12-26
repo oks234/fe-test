@@ -17,17 +17,21 @@ DatePicker.localeTexts['ko'] = {
   titleFormat: 'yyyy년 M월',
 };
 
+const BTN_ACTIVE_CLASS = 'btn--active';
+
 const FILE_SIZE_LIMIT = 15 * 10e6; // 15MB
 const FILE_SIZE_OVER_MSG = '15MB 이하 이미지를 업로드해 주세요';
 const MORE_FILES_OVER_LENGTH_MSG =
   '추가 이미지는 최대 4장까지 등록할 수 있어요';
+
 const LAYOUT_NAME = {
   MAIN: 'main',
   CATEGORY: 'category',
 };
-const BTN_ACTIVE_CLASS = 'btn--active';
+
 const CATEGORY_BTN_ACTIVE_LIMIT = 2;
 const CATEGORY_ACTIVE_OVER_MGS = '최대 2개까지만 선택 가능해요';
+
 const AM_PM_LABELS = {
   am: '오전',
   pm: '오후',
@@ -61,7 +65,22 @@ const notyf = new Notyf({
     },
   ],
 });
+
 const detailObjs = [];
+
+const canGoNextValidators = [];
+
+const addCanGoNextValidator = (validator) => {
+  canGoNextValidators.push(validator);
+};
+
+const validateCanGoNext = () => {
+  const canGoNext = canGoNextValidators.every((validator) => validator());
+  const goNextBtn = document.querySelector('.js-go-next-btn');
+  goNextBtn.disabled = !canGoNext;
+
+  console.log({ canGoNext });
+};
 
 const toast = (msg) => {
   notyf.open({
@@ -109,6 +128,17 @@ const loadedFileToImgEl = (file, imgEl, callback) => {
 
   imgEl.src = imageUrl;
   imgEl.onload = () => {
+    const { naturalWidth, naturalHeight } = imgEl;
+    const ratio = naturalWidth / naturalHeight;
+
+    if (ratio <= 1) {
+      imgEl.classList.add('img--full-width');
+      imgEl.classList.remove('img--full-height');
+    } else {
+      imgEl.classList.remove('img--full-width');
+      imgEl.classList.add('img--full-height');
+    }
+
     URL.revokeObjectURL(imageUrl);
     callback?.();
   };
@@ -198,14 +228,22 @@ const updateDetailObjsDatePickers = () => {
 };
 
 document.addEventListener('DOMContentLoaded', function () {
-  mainImage();
-  moreImages();
-  initCategorySection();
-  initMeetingType();
-  initDetails();
+  const mainImage = initMainImage();
+  const moreImages = initMoreImages();
+  const categorySection = initCategorySection();
+  const contentTitle = initContentTitle();
+  const meetingType = initMeetingType();
+  const details = initDetails();
+
+  addCanGoNextValidator(mainImage.canGoNextValidator);
+  addCanGoNextValidator(moreImages.canGoNextValidator);
+  addCanGoNextValidator(categorySection.canGoNextValidator);
+  addCanGoNextValidator(contentTitle.canGoNextValidator);
+  addCanGoNextValidator(meetingType.canGoNextValidator);
+  addCanGoNextValidator(details.canGoNextValidator);
 });
 
-function mainImage() {
+function initMainImage() {
   const section = document.getElementById('main-image');
 
   if (!section) return;
@@ -234,11 +272,18 @@ function mainImage() {
     loadedFileToImgEl(file, imgEl, () => {
       showElem(imgEl);
       hideElem(display);
+      validateCanGoNext();
     });
   });
+
+  return {
+    canGoNextValidator() {
+      return !validIsElemHidden(imgEl);
+    },
+  };
 }
 
-function moreImages() {
+function initMoreImages() {
   const section = document.getElementById('more-images');
 
   if (!section) return;
@@ -308,7 +353,9 @@ function moreImages() {
 
       const imgEl = box.querySelector('img');
 
-      loadedFileToImgEl(file, imgEl);
+      loadedFileToImgEl(file, imgEl, () => {
+        validateCanGoNext();
+      });
       showElem(imgEl);
       showElem(getNextBox());
     }
@@ -328,6 +375,12 @@ function moreImages() {
       loadedFileToImgEl(file, imgEl);
     });
   }
+
+  return {
+    canGoNextValidator() {
+      return imgEls.some((imgEl) => !validIsElemHidden(imgEl));
+    },
+  };
 }
 
 function initCategorySection() {
@@ -380,6 +433,7 @@ function initCategorySection() {
 
     toggleBtnActive(btn);
     updateSelectBox();
+    validateCanGoNext();
   };
 
   if (!selectBox || !btns?.length) return;
@@ -395,6 +449,29 @@ function initCategorySection() {
   for (const btn of btns) {
     btn.addEventListener('click', handleBtnClick);
   }
+
+  return {
+    canGoNextValidator() {
+      return getActiveBtns().length > 0;
+    },
+  };
+}
+
+function initContentTitle() {
+  const section = document.getElementById('content-title-section');
+  const textarea = section.querySelector('.js-textarea');
+
+  const { validator } = initTextarea(textarea, {
+    inputCallback: () => {
+      validateCanGoNext();
+    },
+  });
+
+  return {
+    canGoNextValidator() {
+      return validator();
+    },
+  };
 }
 
 function initMeetingType() {
@@ -414,6 +491,7 @@ function initMeetingType() {
 
     deactivateBtns();
     toggleBtnActive(btn);
+    validateCanGoNext();
   };
 
   if (!btns.length) return;
@@ -421,6 +499,12 @@ function initMeetingType() {
   for (const btn of btns) {
     btn.addEventListener('click', handleBtnClick);
   }
+
+  return {
+    canGoNextValidator() {
+      return !!btns.find(validIsBtnActive);
+    },
+  };
 }
 
 function initDetails() {
@@ -456,6 +540,12 @@ function initDetails() {
   addDetailBtn.addEventListener('click', appendDetailItem);
 
   appendDetailItem();
+
+  return {
+    canGoNextValidator() {
+      return detailObjs.every((detailObj) => detailObj.validator());
+    },
+  };
 }
 
 function initDetailItem(detailItem) {
@@ -520,6 +610,7 @@ function initDetailItem(detailItem) {
 
     datepicker.on('close', () => {
       datepicker.setDate(latestDate);
+      validateCanGoNext();
     });
 
     const changeDatePickerBtn = document.createElement('button');
@@ -591,7 +682,6 @@ function initDetailItem(detailItem) {
     };
 
     const setStartEndDate = (startEnd, date) => {
-      console.log('setStartEndDate', { startEnd, date });
       const { amPmToggle, hoursInput, minutesInput } =
         findStartEndInputs(startEnd);
       const [hours, minutes] = formatDateToHoursMinutes(date);
@@ -675,8 +765,6 @@ function initDetailItem(detailItem) {
       }
 
       updateLastValues();
-
-      console.log({ startDate, endDate });
     };
 
     const handleAmPmToggle = (event) => {
@@ -751,7 +839,11 @@ function initDetailItem(detailItem) {
     }
   })();
 
-  initTextarea(textarea);
+  const { validator: textareaValidator } = initTextarea(textarea, {
+    inputCallback: () => {
+      validateCanGoNext();
+    },
+  });
 
   return {
     get selectedDate() {
@@ -776,19 +868,22 @@ function initDetailItem(detailItem) {
     setDatePickerDate(date) {
       datepicker.setDate(date);
     },
+    validator() {
+      return this.isDateSelected && textareaValidator();
+    },
   };
 }
 
-function initTextarea(textarea) {
+function initTextarea(textarea, opts) {
   const wrapper = textarea.closest('.textarea-wrapper');
   const count = wrapper.querySelector('.js-textarea__count');
+  const minLength = parseInt(textarea.minLength);
 
   const setState = (state) => {
     wrapper.dataset.state = state;
   };
 
   const validate = () => {
-    const minLength = parseInt(textarea.minLength);
     const lessLength = textarea.value.length < minLength;
 
     if (lessLength) {
@@ -816,5 +911,12 @@ function initTextarea(textarea) {
     preventMoreThanTwoSpaces();
     validate();
     count.innerHTML = `${textarea.value.length}`;
+    opts?.inputCallback();
   });
+
+  return {
+    validator() {
+      return textarea.value.length >= minLength;
+    },
+  };
 }

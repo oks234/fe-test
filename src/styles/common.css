@@ -23,6 +23,21 @@ img {
   height: auto;
 }
 
+img.img--full-width {
+  top: 50%;
+  width: 100%;
+  height: auto;
+  transform: translateY(-50%);
+}
+
+img.img--full-height {
+  left: 50%;
+  max-width: initial;
+  width: auto;
+  height: 100%;
+  transform: translateX(-50%);
+}
+
 .btn {
   --btn-border-color: none;
   --btn-color: #ffffff;

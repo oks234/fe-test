@@ -93,7 +93,7 @@
       <h1 class="header__title">과제</h1>
       <div class="header__inner__btn-area">
         <button type="button" disabled
-          class="header__inner__btn btn btn--sm btn--primary tablet-pc-only">다음으로</button>
+          class="js-go-next-btn header__inner__btn btn btn--sm btn--primary tablet-pc-only">다음으로</button>
       </div>
     </div>
   </header>
@@ -183,6 +183,14 @@
           <hgroup>
             <h2>콘텐츠 제목</h2>
           </hgroup>
+          <div class="textarea-wrapper" data-state>
+            <textarea class="js-textarea" placeholder="활동 내용을 간단히 입력해주세요"
+              minlength="8" maxlength="80"></textarea>
+            <div class="textarea-footer">
+              <span class="js-textarea__count">0</span> / 80자 (최소 8자)
+            </div>
+          </div>
+          <p class="textarea-error">8자 이상 입력해주세요</p>
         </section>
 
         <!-- 활동 방식 선택 SECTION -->
